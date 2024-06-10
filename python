@@ -1,0 +1,33 @@
+import pandas as pd
+
+# Sample CSV data for demonstration (you can replace this with your actual CSV file path)
+data = {
+    'A': [1, 2, None, 4, 5, 2],
+    'B': [5, 6, 7, None, 8, 6],
+    'C': [9, None, 11, 12, 13, 11]
+}
+df = pd.DataFrame(data)
+
+# Explore the DataFrame
+print("First few rows:\n", df.head())
+print("\nDataFrame Info:\n", df.info())
+print("\nStatistical Summary:\n", df.describe())
+
+# Handling missing values
+df.fillna(value={'A': 0, 'B': 0, 'C': 0}, inplace=True)  # Example: filling missing values with 0
+print("\nMissing values after cleaning:\n", df.isnull().sum())
+
+# Removing duplicates
+print("\nDuplicates before removing:", df.duplicated().sum())
+df.drop_duplicates(inplace=True)
+print("Duplicates after removing:", df.duplicated().sum())
+
+# Basic data manipulation
+filtered_df = df[df['A'] > 1]  # Example: filtering rows where column 'A' > 1
+sorted_df = df.sort_values(by='A')  # Example: sorting by column 'A'
+grouped_df = df.groupby('A').sum()  # Example: grouping by column 'A' and summing
+
+# Display results
+print("\nFiltered DataFrame:\n", filtered_df.head())
+print("\nSorted DataFrame:\n", sorted_df.head())
+print("\nGrouped DataFrame:\n", grouped_df.head())
